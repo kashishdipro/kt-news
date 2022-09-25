@@ -68,7 +68,41 @@
         </nav>
     </header>
     <main>
-        <!-- News Display Section -->
+        <!-- Start SortByView and Others Button Section -->
+        <section class="container my-5">
+            <div class="row g-0">
+                <div class="col-sm-12 col-md-8 mb-3">
+                    <div class="row g-0">
+                        <div class="col-6 col-md-2">
+                            <div class="d-flex justify-content-center mt-2">
+                                <h6>Sort By View:</h6>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-10">
+                            <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                                <div class="btn-group" role="group">
+                                    <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Default
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                        <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+                                        <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    <div class="d-flex justify-content-end align-items-center">
+                        <a class="btn btn-primary">Today's Pick</a>
+                        <a class="btn btn-white">Trending</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End SortByView and Others Button Section -->
+        <!-- Start News Display Section -->
         <section class="container">
             <div class="row row-cols-1 row-cols-md-3 g-4">
                 <div class="col-12">
@@ -287,6 +321,7 @@
                 </div>
             </div>
         </section>
+        <!-- End News Display Section -->
     </main>
     <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
