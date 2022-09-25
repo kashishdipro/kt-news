@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KT Blogs</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+    <header>
+        <!-- First NavBar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light rounded" aria-label="Eleventh navbar example">
+            <div class="container border-bottom">
+                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+                    <h6><span class="bg-primary p-1 rounded">KT</span> News</h6>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded="true" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse show justify-content-end" id="navbarsExample09" style="">
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/blog.html">Blog</a>
+                        </li>
+                    </ul>
+    
+                <div class="dropdown text-end">
+                    <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="img/20190209_202723.jpg" alt="mdo" class="rounded-circle" width="32" height="32">
+                    </a>
+                    <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+                        <li><a class="dropdown-item" href="#">Settings</a></li>
+                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Sign out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section class="container">
+            <div class="card text-bg-secondary mb-3">
+                <h5 class="card-header">Question 1:</h5>
+                <div class="card-body">
+                    <h5 class="card-title">What is the difference between var, let and const?</h5>
+                    <p class="card-text"><strong>var:</strong> The scope of a var variable is functional scope. It can be updated and re-declared into the scope. It can be declared without initialization. It can be accessed without initialization as its default value is “undefined”. Hoisting done , with initializing as ‘default’ value.</p>
+                    <p class="card-text"><strong>let:</strong> The scope of a let variable is block scope. It can be updated but cannot be re-declared into the scope. It can be declared without initialization. It cannot be accessed without initialization otherwise it will give ‘referenceError’. Hoisting is done , but not initialized (this is the reason for error when we access the let variable before declaration/initialization.</p>
+                    <p class="card-text"><strong>const:</strong> The scope of a const variable is block scope. It cannot be updated or re-declared into the scope. It cannot be declared without initialization. It cannot be accessed without initialization, as it cannot be declared without initialization. Hoisting is done, but not initialized (this is the reason for error when we access the const variable before declaration/initialization.</p>
+                    <a href="https://www.geeksforgeeks.org/difference-between-var-let-and-const-keywords-in-javascript/" class="btn btn-primary">CLick Here For More Information</a>
+                </div>
+            </div>
+            <div class="card text-bg-success mb-3">
+                <h5 class="card-header">Question 2:</h5>
+                <div class="card-body">
+                    <h5 class="card-title">What is the difference between arrow function and regular function?</h5>
+                    <h6 class="card-title">Following are the main differences:</h6>
+                    <p class="card-text"><strong>1️. Syntax:</strong> We can write regular and arrow function in this way:
+                        Regular function or ES5:
+                        var add = function(x, y) {
+                            return x + y
+                        };
+                        In regular function, you have to use return keyword to return any value. If you don’t return anything then the function will return undefined.
+                        Arrow function or ES6:
+                        let add = (x, y) =>  x + y;
+                        If the arrow function contains one expression, you can omit the curly braces, and then the expression will be implicitly returned.
+                    </p>
+                    <p class="card-text"><strong>2️. Arguments binding</strong> In regular function, Arguments keywords can be used to access the arguments of which passed to function.
+                    function regularFunction(a,b) {
+                        console.log(arguments)
+                    }
+                    regularFunction(1,2); 
+                    Arrow functions do not have an arguments binding.
+                    const arrowFunction = (a,b) => {
+                        console.log(arguments)
+                    }
+                    arrowFunction(1,2); 
+                    However, if you want to access arguments in an arrow function, you can use the rest operator: 
+                    const arrowFunction = (...args) => {
+                        console.log(...args)
+                    }
+                    </p>
+                    <p class="card-text"><strong>3️. this</strong> In regular function, this changes according to the way that function is invoked.
+                    - Simple Invocation: this equals the global object or maybe undefined if you are using strict mode. 
+                    - Method Invocation: this equals the object that owns the method. 
+                    - Indirect Invocation: this equals the first argument.
+                    - Constructor Invocation: this equals the newly created instance. 
+                    1️⃣ Simple Invocation 
+                    function simpleInvocation() {
+                        console.log(this);
+                    }
+                    simpleInvocation(); 
+                    2️⃣ Method Invocation
+                    const methodInvocation = {
+                        method() {
+                            console.log(this);
+                        }
+                    };
+                    methodInvocation.method(); 
+                    3️⃣ Indirect Invocation
+                    const context = { aVal: 'A', bVal: 'B' };
+                    function indirectInvocation() {
+                        console.log(this);
+                    }
+                    indirectInvocation.call(context);  
+                    indirectInvocation.apply(context); 
+                    4️⃣ Constructor Invocation
+                    function constructorInvocation() {
+                        console.log(this);
+                    } 
+                    new constructorInvocation(); 
+                    Arrow functions don’t have their own this, and they don’t redefine the value of this within the function.
+
+                    this inside an arrow function always refers to this from the outer context. 
+                    var name = "Suprabha"
+                    let newObject = {
+                        name : "supi",
+                        arrowFunc: () => {
+                            console.log(this.name); 
+                        },
+                        regularFunc() {
+                            console.log(this.name); 
+                        }   
+                    } 
+                    newObject.arrowFunc(); 
+                    newObject.regularFunc(); 
+                    </p>
+                    <p class="card-text"><strong>4️. new</strong> Regular functions are constructible, they can be called using the new keyword. 
+                    function add (x, y) {
+                        console.log(x + y)
+                    }
+                    let sum = new add(2,3); 
+                    However, arrow functions can never be used as constructor functions. Hence, they can never be invoked with the new keyword. 
+                    let add = (x, y) => console.log(x + y);
+                    const sum = new add(2,4);  
+                    </p>
+                    <p class="card-text"><strong>5️. No duplicate named parameters</strong> 
+                    In normal function, we can do this: 
+                    ✅ will work 
+                    function add(a, a) {} 
+                    ❌ will not work 
+                    'use strict';
+                    function add(a, a) {} 
+                    Arrow functions can never have duplicate named parameters, whether in strict or non-strict mode. 
+                    const arrowFunc = (a,a) => {} 
+                    </p>
+                    <p class="card-text"><strong>6️. Function Hoisting</strong> In regular function, function gets hoisting at top. 
+                    normalFunc()
+                    function normalFunc() {
+                        return "Normal Function"
+                    } 
+                    In arrow function, function get hoisted where you define. So, if you call the function before initialisation you will get referenceError. 
+                    arrowFunc()
+                    const arrowFunc = () => {
+                        return "Arrow Function"
+                    } 
+                    </p>
+                    <p class="card-text"><strong>7️. Methods</strong> You can define methods in class using regular function. 
+                    class FullName {
+                        constructor(name) {
+                            this.name = name;
+                        }
+                        result() {
+                            console.log(this.name);
+                        }
+                    }
+                    let name = new FullName("Suprabha");
+                    console.log(name); 
+                    In arrow function, you don’t have to bind with context. 
+                    class FullName {
+                        constructor(name) {
+                            this.name = name;
+                        }
+                        result = () => {
+                            console.log(this.name);
+                        }
+                    }
+                    let name = new FullName("Suprabha");
+                    setTimeout(name.result, 2000);
+                    </p>
+                    <a href="https://medium.com/geekculture/regular-vs-arrow-function-1f8140fbcece" class="btn btn-primary">CLick Here For More Information</a>
+                </div>
+            </div>
+            <div class="card text-bg-secondary mb-3">
+                <h5 class="card-header">Question 3:</h5>
+                <div class="card-body">
+                    <h5 class="card-title">What is the difference between map(), forEach(), filter(), find() and reduce() method?</h5>
+                    <p class="card-text"><strong>map() method:</strong> The map() method creates an entirely new array. The map() method returns the newly created array according to the provided callback function. With the map() method, we can chain the other array Instance methods i.e returned value of the map() method invokes the next method in the chain. It  does not change the original array. It calls a function once for each element in an array. Its supported browsers are -:
+
+                        Chrome , Internet Explorer 9-11 , Opera Mini , Safari , Microsoft Edge , Firefox.</p>
+                    <p class="card-text"><strong>forEach() method:</strong> The forEach() method does not create a new array based on the given array. The forEach() method returns “undefined“. The forEach() method doesn’t return anything hence the method chaining technique cannot be applied here. It is not executed for empty elements. It is an ECMAScript5 (ES5) feature. Its supported browsers are -:
+
+                        Chrome , Internet Explorer 9-11 , Opera Mini , Safari , Microsoft Edge , Firefox.</p>
+                    <p class="card-text"><strong>filter() method:</strong> The filter() method is used to filter all the elements. The filter() method returns the element that matches and removes the element that does not match. The filter() method search through all the elements. The filter() method does not change the original array. The filter() method does not execute the function for empty elements. Its syntax is -:
+
+                        array.filter(function(value, Index, array), thisValue). In filter() method a value is passed to the function as its this value.</p>
+                    <p class="card-text"><strong>find() method:</strong> The find() method is used to find all the descendant elements of the selected element. The find() method finds the element in the DOM tree by traversing through the root to the leaf. The find() method search through all the child elements only. It does not execute the function for empty elements. It does not change the original array. Its syntax is -:
+
+                        array.find(function(value, Index, array),thisValue). This method returns undefined if no elements are found.</p>
+                    <p class="card-text"><strong>reduce() method:</strong> The reduce() method reduces an array of values down to just one value. To get the output value, it runs a reducer function on each element of the array. The callback argument is a function that will be called once for every item in the array. This function takes four arguments, but often only the first two are used. 
+                        > accumulator - the returned value of the previous iteration
+                        > currentValue - the current item in the array
+                        > index - the index of the current item
+                        > array - the original array on which reduce was called
+                        > The initialValue argument is optional. If provided, it will be used as the initial accumulator value in the first call to the callback function. 
+                        const numbers = [1, 2, 3, 4];
+                        const sum = numbers.reduce(function (result, item) {
+                          return result + item;
+                        }, 0);
+                        console.log(sum); 
+                        In the next example, reduce() is used to transform an array of strings into a single object that shows how many times each string appears in the array. Notice this call to reduce passes an empty object {} as the initialValue parameter. This will be used as the initial value of the accumulator (the first argument) passed to the callback function.
+                    </p>
+                    <a href="https://www.geeksforgeeks.org/difference-between-foreach-and-map-loop-in-javascript/" class="btn btn-primary">CLick Here For More Information</a>
+                </div>
+            </div>
+            <div class="card text-bg-secondary mb-3">
+                <h5 class="card-header">Question 4:</h5>
+                <div class="card-body">
+                    <h5 class="card-title">Why we use template string?</h5>
+                    <p class="card-text"><strong>In ES6, you create a template literal by wrapping your text in backticks (``) as follows:</strong> let simple = `This is a template literal`; and you get the following features: 
+                        > A multiline string: a string that can span multiple lines.
+                        > String formatting: the ability to substitute part of the string for the values of variables or expressions. This feature is also called string interpolation.
+                        > HTML escaping: the ability to transform a string so that it is safe to include in HTML.
+                    </p>
+                    <a href="https://www.javascripttutorial.net/es6/javascript-template-literals/" class="btn btn-primary">CLick Here For More Information</a>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
