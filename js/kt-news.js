@@ -1,4 +1,31 @@
+// Dynamically Load and Display categories 
+const displayCategories = news_categories => {
+    const categoriesContainer = document.getElementById('categories-container');
+    categoriesContainer.innerHTML = `
+    <ul class="navbar-nav">
+        <li class="nav-item"><a href="/" class="nav-link link-dark px-2 active" aria-current="page">Home</a></li>
+    </ul>
+    `
+    news_categories.forEach(news_category => {
+        const categoryUl = document.createElement('ul');
+        categoryUl.classList.add('navbar-nav');
+        categoryUl.innerHTML = `
+        <li onclick="loadNewsDetails('${news_category.category_id}')" class="nav-item"><a href="#" class="nav-link link-dark px-2">${news_category.category_name}</a></li>
+        `;
+        categoriesContainer.appendChild(categoryUl);
+    });
+}
+const loadCategories = async () =>{
+    const url = `https://openapi.programming-hero.com/api/news/categories`;
+    const res = await fetch(url);
+    const data = await res.json();
+    displayCategories(data.data.news_category);
+}
+loadCategories();
+
+// Dynamically Load and Display News from choosen category 
 const displayNewsDetails = newsdetails =>{
+    console.log(newsdetails);
     const newsContainer = document.getElementById('news-container');
     newsContainer.textContent = '';
     newsdetails.forEach(news => {
@@ -24,25 +51,25 @@ const displayNewsDetails = newsdetails =>{
                                         <img src="${news.author.img}" class="rounded-circle" width="50" height="50">
                                     </div>
                                     <div class="p-2">
-                                        <p>${news.author.name}</p>
-                                        <p class="text-muted">${news.author.published_date}</p>
+                                        <p>${news.author.name ? news.author.name : 'No Data Available'}</p>
+                                        <p class="text-muted">${news.author.published_date ? news.author.published_date : 'No Data Available'}</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="d-flex justify-content-center align-items-center">
                                     <i class="fa-regular fa-eye"></i>
-                                    <h6 class="pt-1 px-1">${news.total_view}</h6>
+                                    <h6 class="pt-1 px-1">${news.total_view ? news.total_view : 'No Data Available'}</h6>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="d-flex justify-content-center align-items-center">
-                                    <h6>Rating: ${news.rating.number}</h6>
+                                    <h6>Rating: ${news.rating.number ? news.rating.number : 'No Data Available'}</h6>
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="d-flex justify-content-center align-items-center">
-                                    <button class="btn btn-primary rounded-circle">
+                                    <button onclick="loadDetailedNews('${news._id}')" class="btn btn-primary rounded-circle" data-bs-toggle="modal" data-bs-target="#detailesNewsModal">
                                         <i class="fa-solid fa-arrow-right"></i>
                                     </button>
                                 </div>
@@ -55,32 +82,6 @@ const displayNewsDetails = newsdetails =>{
         newsContainer.appendChild(newsDiv);
     });
 }
-
-const loadCategories = async () =>{
-    const url = `https://openapi.programming-hero.com/api/news/categories`;
-    const res = await fetch(url);
-    const data = await res.json();
-    displayCategories(data.data.news_category);
-}
-
-const displayCategories = news_categories => {
-    console.log(news_categories);
-    const categoriesContainer = document.getElementById('categories-container');
-    categoriesContainer.innerHTML = `
-    <ul class="navbar-nav">
-        <li class="nav-item"><a href="/" class="nav-link link-dark px-2 active" aria-current="page">Home</a></li>
-    </ul>
-    `
-    news_categories.forEach(news_category => {
-        const categoryUl = document.createElement('ul');
-        categoryUl.classList.add('navbar-nav');
-        categoryUl.innerHTML = `
-        <li onclick="loadNewsDetails('${news_category.category_id}')" class="nav-item"><a href="#" class="nav-link link-dark px-2">${news_category.category_name}</a></li>
-        `;
-        categoriesContainer.appendChild(categoryUl);
-    });
-} 
-
 const loadNewsDetails = async category_id =>{
     const url = `https://openapi.programming-hero.com/api/news/category/${category_id}`;
     const res = await fetch(url);
@@ -88,4 +89,24 @@ const loadNewsDetails = async category_id =>{
     displayNewsDetails(data.data);
 }
 loadNewsDetails();
-loadCategories();
+
+// Dynamically Load and Display Detailed News in Modal
+const displayDetailedNews = detailednews => {
+    const showNewsTitle = document.getElementById('show-newstitle');
+    showNewsTitle.innerHTML = `
+    <h5 class="modal-title" id="detailesNewsModalLabel">${detailednews.title}</h5>
+    `;
+    const showNewsDetails = document.getElementById('show-newsdetails');
+    showNewsDetails.innerHTML = `
+    <h6>${detailednews.details}</h6>
+    `;
+}
+
+const loadDetailedNews = async _id =>{
+    const url = `https://openapi.programming-hero.com/api/news/${_id}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    displayDetailedNews(data.data[0]);
+}
+loadDetailedNews();
+
