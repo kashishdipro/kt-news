@@ -10,7 +10,7 @@ const displayCategories = news_categories => {
         const categoryUl = document.createElement('ul');
         categoryUl.classList.add('navbar-nav');
         categoryUl.innerHTML = `
-        <li onclick="loadNewsDetails('${news_category.category_id}')" class="nav-item"><a href="#" class="nav-link link-dark px-2">${news_category.category_name}</a></li>
+        <li onclick="loadNewsDetails('${news_category.category_id}')" class="nav-item"><a href="#" class="nav-link link-primary px-2">${news_category.category_name}</a></li>
         `;
         categoriesContainer.appendChild(categoryUl);
     });
@@ -25,8 +25,11 @@ loadCategories();
 
 // Dynamically Load and Display News from choosen category 
 const displayNewsDetails = newsdetails =>{
-    console.log(newsdetails);
     const newsContainer = document.getElementById('news-container');
+    const newsItemsFound = document.getElementById('news-itemsfound');
+    newsItemsFound.innerHTML = `
+    <h5 class="card-title rounded">${newsdetails.length} items found from this category</h5>
+    `
     newsContainer.textContent = '';
     newsdetails.forEach(news => {
         const newsDiv = document.createElement('div');
