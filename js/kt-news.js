@@ -81,8 +81,12 @@ const displayNewsDetails = newsdetails =>{
         `; 
         newsContainer.appendChild(newsDiv);
     });
+    // Stop Spinner
+    toggleSpinner(false);
 }
 const loadNewsDetails = async category_id =>{
+    // Start Spinner
+    toggleSpinner(true);
     const url = `https://openapi.programming-hero.com/api/news/category/${category_id}`;
     const res = await fetch(url);
     const data = await res.json();
@@ -109,4 +113,14 @@ const loadDetailedNews = async _id =>{
     displayDetailedNews(data.data[0]);
 }
 loadDetailedNews();
+
+// Dynamically Fetching News Spinner
+const toggleSpinner = isLoading => {
+    const fetchingNewsSpinner = document.getElementById('fetching-news-spinner');
+    if(isLoading){
+        fetchingNewsSpinner.classList.remove('d-none');
+    }else{
+        fetchingNewsSpinner.classList.add('d-none');
+    }
+} 
 
