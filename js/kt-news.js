@@ -10,16 +10,20 @@ const displayCategories = news_categories => {
         const categoryUl = document.createElement('ul');
         categoryUl.classList.add('navbar-nav');
         categoryUl.innerHTML = `
-        <li onclick="loadNewsDetails('${news_category.category_id}')" class="nav-item"><a href="#" class="nav-link link-primary px-2">${news_category.category_name}</a></li>
+        <li onclick="loadNewsDetails('${news_category.category_id}')" class="nav-item"><a href="#" class="nav-link link-dark px-2">${news_category.category_name}</a></li>
         `;
         categoriesContainer.appendChild(categoryUl);
     });
 }
 const loadCategories = async () =>{
     const url = `https://openapi.programming-hero.com/api/news/categories`;
-    const res = await fetch(url);
-    const data = await res.json();
-    displayCategories(data.data.news_category);
+    try {
+        const res = await fetch(url);
+        const data = await res.json();
+        displayCategories(data.data.news_category);
+    } catch (error) {
+        console.log(error);
+    }
 }
 loadCategories();
 
@@ -91,29 +95,49 @@ const loadNewsDetails = async category_id =>{
     // Start Spinner
     toggleSpinner(true);
     const url = `https://openapi.programming-hero.com/api/news/category/${category_id}`;
-    const res = await fetch(url);
-    const data = await res.json();
-    displayNewsDetails(data.data);
+    try {
+        const res = await fetch(url);
+        const data = await res.json();
+        displayNewsDetails(data.data);
+    } catch (error) {
+        console.log(error);
+    }
 }
 loadNewsDetails();
 
 // Dynamically Load and Display Detailed News in Modal
 const displayDetailedNews = detailednews => {
+    console.log(detailednews);
     const showNewsTitle = document.getElementById('show-newstitle');
     showNewsTitle.innerHTML = `
     <h5 class="modal-title" id="detailesNewsModalLabel">${detailednews.title}</h5>
     `;
     const showNewsDetails = document.getElementById('show-newsdetails');
     showNewsDetails.innerHTML = `
-    <h6>${detailednews.details}</h6>
+        <h6>${detailednews.details}</h6>
+        <div class="d-flex justify-content-around align-items-center">
+            <div>
+                <img src="${detailednews.author.img}" class="rounded-circle" width="50" height="50">
+            </div>
+            <div class="p-2">
+                <p>${detailednews.author.name ? detailednews.author.name : 'No Data Available'}</p>
+                <p class="text-muted">${detailednews.author.published_date ? detailednews.author.published_date : 'No Data Available'}</p>
+            </div>
+        </div>
+        <h6>Tranding:${detailednews.others_info.is_trending ?  '✅' : '❌'}</h6>
+        <h6>Today's Pick:${detailednews.others_info.is_todays_pick ? '✅' : '❌'}</h6>
     `;
 }
 
 const loadDetailedNews = async _id =>{
     const url = `https://openapi.programming-hero.com/api/news/${_id}`;
-    const res = await fetch(url);
-    const data = await res.json();
-    displayDetailedNews(data.data[0]);
+    try {
+        const res = await fetch(url);
+        const data = await res.json();
+        displayDetailedNews(data.data[0]);
+    } catch (error) {
+        console.log(error)
+    }
 }
 loadDetailedNews();
 
